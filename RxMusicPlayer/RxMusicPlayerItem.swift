@@ -102,7 +102,11 @@ open class RxMusicPlayerItem: NSObject {
             return .just(self)
         }
 
-        let asset = AVAsset(url: url)
+        let headers = ["Authorization": "Bearer tokenabc"]
+        let options = ["AVURLAssetHTTPHeaderFieldsKey": headers]
+        
+        let asset = AVURLAsset(url: url, options: options)
+        // let asset = AVAsset(url: url)
 
         return Single.create { single in
             let load = Observable.combineLatest(
